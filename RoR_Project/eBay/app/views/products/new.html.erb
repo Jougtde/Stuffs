@@ -1,0 +1,64 @@
+<%= form_for(@product) do |f| %>
+<% if @product.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+  <ul>
+    <% @product.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <div class="ui message">
+      <h2>New product</h2>
+      <%= link_to "Back", :back , class: "ui blue basic button"%>
+    </div>
+    <div class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="tag icon"></i>
+            <%= f.text_field :title, autofocus: true, placeholder: "Title" %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <%= f.text_area :description, placeholder: "Description" %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <%= f.collection_select(:category_id, @categories, :id, :name, {:prompt => 'Select a category for your product' }) %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="euro icon"></i>
+            <%= f.number_field :price, placeholder: "Immediate Purchase Price" %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="euro icon"></i>
+            <%= f.number_field :starting_price, placeholder: "Starting Price" %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <%= f.text_field :end_date, :id => 'datetimepicker3'%>
+          </div>
+        </div>
+        <div class="actions"><%= f.submit "Create", class: "ui blue basic button"%></div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+
+<%= link_to 'Back', products_path %>

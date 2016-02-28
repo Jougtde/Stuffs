@@ -1,0 +1,28 @@
+<% if @product.errors.any? %>
+<div id="error_explanation">
+  <ul>
+    <% @product.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form_for(@product) do |f| %>
+  <div class="field">
+    <%= f.label :title, :class=>"col-xs-2" %> <%= f.text_field :title, :placeholder=>"Title" %>
+  </div>
+  <div class="field">
+    <%= f.label :price, :class=>"col-xs-2" %> <%= f.number_field :price, :placeholder=>"Price" %>
+  </div>
+  <div class="field">
+    <%= f.label :description, :class=>"col-xs-2" %> <%= f.text_area :description, :placeholder=>"Description" %>
+  </div>
+  <div class="field">
+    <%= f.label "User", :class=>"col-xs-2" %> <%= f.number_field :user_id, :placeholder=>"User ID" %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class=>"tiny ui blue basic button" %>
+  </div>
+  <br>
+<% end %>

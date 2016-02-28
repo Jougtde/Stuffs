@@ -1,0 +1,27 @@
+<h1>User List</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>name</th>
+        <th>email</th>
+    </tr>
+    <tr ng-repeat="user in usr.users">
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>
+            <button class="btn" ng-click="usr.removeUser(user._id)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
+</table>
+<form ng-submit="usr.sendUser()">
+    <div class="form-group">
+        <label for="title">name</label>
+        <input type="text" class="form-control" id="name" placeholder="name" ng-model="usr.newusr.name">
+    </div>
+    <div class="form-group">
+        <label for="text">email</label>
+       <input type="text" class="form-control" id="email" placeholder="email" ng-model="usr.newusr.email">
+    </div>
+    <button type="submit" class="btn btn-default">Crate user</button>
+</form>

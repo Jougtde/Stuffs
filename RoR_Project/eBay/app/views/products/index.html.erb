@@ -1,0 +1,109 @@
+<% if @p %>
+<h4 class="ui horizontal divider header">
+  <i class="search icon"></i>
+  Result of your research
+</h4>
+<div class="ui special three cards">
+  <% @p.each do |product| %>
+  <% @user = User.find(product.user_id) %>
+  <div class="ui card">
+    <div class='extra content'>
+      <div class="header">
+        <div>
+          <%= link_to @user, class:"right floated" do %><img class="ui avatar image" src="https://random-octodex.herokuapp.com/random"><strong><%= @user.first_name %></strong><% end %>
+        </div>
+        <div class="text-center"><%= product.title %>
+        </div>
+      </div>
+    </div>
+    <div class="blurring dimmable image">
+      <div class="ui dimmer">
+        <div class="content">
+          <div class="center">
+            <div>
+              <% if current_user == @user %>
+              <%= rating_for product, "note_product", readonly: true, half_show: true %>
+              <% else %>
+              Rating :
+              <%= rating_for product, "note_product", :half_show => true %>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <img src='<%= product.img %>' />
+    </div>
+
+    <div class="extra">
+      Price : <strong class='right floated'><%= product.price %>
+        <i class="euro icon"></i> </strong>
+        <br>
+        <% if current_user == @user %>
+        <%= rating_for product, "note_product", readonly: true, half_show: true %>
+        <% else %>
+        <strong class='right floated'><%= rating_for product, "note_product", :half_show => true %></strong>
+        <% end %>
+      </div>
+      <div class="extra">
+        Posted : <strong class='right floated'><%= product.created_at.strftime("%d %b. %Y") %> </strong>
+      </div>
+      <div class="extra">
+        <div class='text-center'>
+          <%= link_to product, :class=>  "ui blue circular basic button" do %> <i class="unhide icon"></i> <%= "Show"  %><% end %>
+          <% if current_user != nil && current_user.role == 'admin'%>
+          <% if current_user.id == product.user_id %>
+          <%= link_to edit_product_path(product), :class=>  "ui blue basic circular button" do %> <i class="edit icon"></i><%= "Edit"  %><% end %>
+          <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' }, :class=>  "ui red basic circular button" do %> <i class="trash outline icon"></i><%= "Del"  %><% end %>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <% else %>
+  <h4 class="ui horizontal divider header">
+    <i class="tag icon"></i>
+    Listing products
+  </h4>
+  <table class="ui striped celled table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>User</th>
+        <th>Category</th>
+        <th>Ratings</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+      <% @user = User.find(product.user_id) %>
+      <% @category = Category.find(product.category_id) %>
+      <tr>
+        <td><%= product.title %></td>
+        <td><%= product.description %></td>
+        <td><%= product.price %><i class="euro icon"></i></td>
+        <td><%= link_to @user do %><%= @user.first_name %> <% end %></td>
+        <td><%= link_to @category do %><%= @category.name %> <% end %></td>
+        <td><%= rating_for product, "note_product", half_show: true, enable_half: true  %></td>
+        <td>
+          <%= link_to product, :class=>  "ui blue basic button" do %> <i class="unhide icon"></i> <%= "Show" %> <% end %>
+          <% if current_user != nil &&  current_user.role == "admin" %>
+          <%= link_to edit_product_path(product), :class=>  "ui blue basic button" do %> <i class="edit icon"></i> <%= "Edit"  %> <% end %>
+          <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' }, :class=>  "ui red basic button" do %> <i class="trash outline icon"></i> <%= "Delete" %> <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @collection, renderer: BootstrapPagination::Rails, inner_window: 1, outter_window: 1 %>
+  <%= link_to 'New Product', new_product_path %>
+  <% end %>

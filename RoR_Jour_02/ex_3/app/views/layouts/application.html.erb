@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RoR PoC</title>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+</head>
+<body>
+<% if logged_in? %>
+<div class="ui three item menu">
+  <a href="/users" class="item">Users</a>
+  <a href="/products" class="item">Products</a>
+  <%= link_to logout_path, method: :delete, :class=> "medium circular ui icon button primary" do %><i class="sign out icon"></i> <%= "Logout" %><% end %>
+</div>
+<% else %>
+<div class="ui four item menu">
+  <a href="/login" class="item">Login</a>
+  <a href="/users/new" class="item">Register</a>
+  <a href="/users" class="item">Users</a>
+  <a href="/products" class="item">Products</a>
+</div>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

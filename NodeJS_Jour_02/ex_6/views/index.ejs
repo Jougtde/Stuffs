@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+</head>
+<body>
+<% form_for('show', function(f){ %>
+  <%- f.label_for("Name :") %>
+  <%- text_field_tag("name",{"value":''}) %><br />
+  <%- f.label_for("Gender :") %>
+  <%- select_tag("gender",[{"value":"male","text":"Male"},{"value":"female","text":"Femaile"}],{"value":"male"}) %><br>
+  <%- f.submit({class: 'ui button basic teal'}) %><br />
+<% }) %>
+</body>
+</html>

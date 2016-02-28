@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  capitale: MyString
+  devise: MyString
+  habitants: 1
+
+two:
+  capitale: MyString
+  devise: MyString
+  habitants: 1

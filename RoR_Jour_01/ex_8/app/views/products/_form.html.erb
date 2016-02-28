@@ -1,0 +1,35 @@
+<% content_for :head do %>
+<head>
+<title>Ex3</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="/assets/products.scss">
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<% end %>
+
+<% if @product.errors.any? %>
+<div id="error_explanation">
+  <ul>
+    <% @product.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form_for(@product) do |f| %>
+  <div class="field">
+    <%= f.label :title, :class=>"col-xs-2" %> <%= f.text_field :title, :placeholder=>"Title" %>
+  </div>
+  <div class="field">
+    <%= f.label :price, :class=>"col-xs-2" %> <%= f.text_field :price, :placeholder=>"Price" %>
+  </div>
+  <div class="field">
+    <%= f.label :description, :class=>"col-xs-2" %> <%= f.text_area :description, :placeholder=>"Description" %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class=>"btn btn-sm btn-primary" %>
+  </div>
+  <br>
+<% end %>

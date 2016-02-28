@@ -1,0 +1,114 @@
+<h4 class="ui horizontal divider header">
+  <i class="tag icon"></i>
+  Product
+</h4>
+<br />
+<div class="ui middle aligned center aligned grid">
+  <div class="ui cards">
+    <div class="card">
+      <div class="image">
+        <img src="<%= @product.img %>"/>
+      </div>
+      <div class="content">
+        <div class="header"><%= @product.title %></div>
+        <div class="description">
+          <%= @product.description %>
+        </div>
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          Added in <strong><%= @product.created_at.to_formatted_s(:monthyear) %></strong>
+        </span>
+        <span>
+          <%= rating_for @product, "note_product", half_show: true, enable_half: true %>
+        </span>
+      </div>
+      <div class="content">
+        <%= social_share_button_tag(@product.title, :popup => "true") %>
+        <a href="mailto:?subject=Look at this product !&body=Hello my dear friend,%0D You can bid on this awesome product '<%= @product.title %>' here : <%= request.original_url %>"><i class="mail icon"></i>Email a friend</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui card">
+    <% if @bids %>
+    <% @bids.each do |b| %>
+    <div class="content">
+      <%= form_for(@bid) do |f| %>
+      <div class="field">
+        <%= f.number_field :max_bid %>
+      </div>
+      <div class="actions">
+        <%= f.hidden_field :product_id, :value => @product.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= button_tag(type: "submit", class: "ui blue basic icon button") do %>Place Bid<% end %>
+      </div>
+      <% end %>
+    </div>
+    <div class="content">
+      Actual bid : <%= @product.actual_price %>€<br />
+      Buy now at : <%= @product.price %>€<br />
+      Your maximum bid : <%= b.max_bid %>€<br />
+      End of the auction : <%= @product.end_date.to_formatted_s(:short) %>
+    </div>
+    <% end %>
+    <% end %>
+    <div class="content">
+      <%= form_for(@bid) do |f| %>
+      <div class="field">
+        <%= f.number_field :max_bid %>
+      </div>
+      <div class="actions">
+        <%= f.hidden_field :product_id, :value => @product.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= button_tag(type: "submit", class: "ui blue basic icon button") do %>Place Bid<% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<br />
+
+<% @commentable = @product %>
+<% @comments = @commentable.comments.recent.limit(10).all %>
+<div class="ui message">
+  <h3 class="ui dividing header">Latest Comments</h3>
+  <% @comments.each do |c| %>
+  <br />
+  <div class="comment">
+    <h3 class="ui dividing header">
+      <p class="avatar">
+        <%= link_to user_path(c.user_id) do %>
+        <img src="http://random-octodex.herokuapp.com/random" height="80" width="80">
+        <% end %>
+      </p>
+      <%= rating_for_user @product, User.find(current_user.id), 'product', readonly: true %>
+    </h3>
+    <div class="content">
+      <%= link_to User.find(c.user_id).first_name, user_path(c.user_id) %>
+      <span class="date">on <%= c.created_at.strftime("%A %d %b. %Y  %k:%M:%S") %></span>
+      <div class="text">
+        <%= c.comment %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <br>
+
+  <%= form_tag "/products/add_new_comment" do %>
+  <form class="ui reply form">
+    <div class="field">
+      <%= hidden_field_tag "id", @product.id %>
+      <%= text_area_tag (:comment)  %>
+    </div>
+    <div>
+      <%= button_tag(type: "submit", class: "ui blue basic icon button") do %><i class="icon edit"></i>Send review<% end %>
+    </div>
+  </form>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>

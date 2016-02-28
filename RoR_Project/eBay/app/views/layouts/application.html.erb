@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>eBay</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+</head>
+<body>
+  <div id="up">
+    <%= render "layouts/navbar" %>
+  </div>
+
+  <div id="wrap">
+    <div class="container">
+      <br />
+      <%= semantic_flash %>
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>

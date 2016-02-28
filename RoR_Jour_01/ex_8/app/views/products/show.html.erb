@@ -1,0 +1,29 @@
+<% content_for :head do %>
+<head>
+<title>Ex3</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="/assets/products.scss">
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong class="col-xs-2">Title :</strong>
+  <%= @product.title %>
+</p>
+
+<p>
+  <strong class="col-xs-2">Price :</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong class="col-xs-2">Description :</strong><br>
+  <%= @product.description %>
+</p>
+
+<%= link_to edit_product_path(@product), :class=> "btn btn-sm btn-primary" do %><span class="glyphicon glyphicon-edit"></span> <%= "Edit" %><% end %>
+<%= link_to products_path, :class=> "btn btn-sm btn-primary" do %> <span class="glyphicon glyphicon-chevron-left"></span> <%= "Back" %><% end %>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>jQuery-ajax</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.0.js"></script>
+<script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.js"></script>
+<script type="text/javascript" src="js/noty-base.js"></script>
+</head>
+<body>
+<form method="post" id="form1">
+  Email :<br>
+  <input type="email" name="email">
+  <input type="button" value="check" id="sub">
+</form>
+
+<script>
+  $("#sub").click(function (){
+    $.post( "ex03.php", $("#form1").serialize() )
+        .done(function(data) {
+          generate("success", data);
+        })
+        .fail(function(req, textStatus, errorThrown) {
+          generate("error", req.responseText);
+        });
+      });
+</script>
+</body>
+</html>

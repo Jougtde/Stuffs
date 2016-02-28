@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  starting_price: 1
+  actual_bid: 1
+  minimum_bid: 1
+  end_date: 2016-02-09 18:47:57
+  immediate_price: 1
+  max_bid: 1
+  product_id: 1
+  user_id: 1
+
+two:
+  starting_price: 1
+  actual_bid: 1
+  minimum_bid: 1
+  end_date: 2016-02-09 18:47:57
+  immediate_price: 1
+  max_bid: 1
+  product_id: 1
+  user_id: 1

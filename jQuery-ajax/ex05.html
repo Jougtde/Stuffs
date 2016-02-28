@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>jQuery-ajax</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.0.js"></script>
+<script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.js"></script>
+<link rel="stylesheet" type="text/css" href="../semantic/semantic.css">
+</head>
+<body>
+<button id="butt">Load countries</button><br>
+<table class="ui celled striped selectable table" id="country">
+  <tr>
+    <th>Countries Codes</th>
+    <th>Countries Names</th>
+  </tr>
+</table>
+
+<script>
+  $("#butt").click(function (){
+    $.getJSON( "countries.json", function(result){
+    $.each(result, function(codes, names){
+      var data = "<tr>"+"<td class='codes'>"+codes+"</td>"+"<td class='names'>"+names+"</td>"+"</tr>";
+
+    $("#country").append(data);
+    });
+  });
+});
+</script>
+</body>
+</html>

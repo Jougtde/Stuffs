@@ -1,0 +1,16 @@
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  ratyrate_rater
+  ratyrate_rateable 'note_user'
+
+  acts_as_commentable
+
+  has_many :products, foreign_key: "user_id", dependent: :destroy
+  has_many :bids, foreign_key: "user_id"
+
+  devise :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :trackable, :validatable
+
+  validates_presence_of :first_name, :last_name, :address
+end

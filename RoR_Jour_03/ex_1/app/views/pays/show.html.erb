@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Capitale:</strong>
+  <%= @pay.capitale %>
+</p>
+
+<p>
+  <strong>Devise:</strong>
+  <%= @pay.devise %>
+</p>
+
+<p>
+  <strong>Habitants:</strong>
+  <%= @pay.habitants %>
+</p>
+
+<%= link_to 'Edit', edit_pay_path(@pay) %> |
+<%= link_to 'Back', pays_path %>

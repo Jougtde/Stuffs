@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<div class="ui card">
+  <div class="image">
+    <img src="https://media.playstation.com/is/image/SCEA/ps4-system-imageblock-vs-us-19jun15?$TwoColumn_Image$">
+  </div>
+  <div class="content">
+    <a class="header"><%= @product.title %></a>
+    <div class="meta">
+      <span class="date"><%= @product.price %> €</span>
+    </div>
+    <div class="description">
+      <%= @product.description %>
+    </div>
+  </div>
+</div>
+
+<%= link_to edit_product_path(@product), :class=> "btn btn-sm btn-primary" do %><span class="glyphicon glyphicon-edit"></span> <%= "Edit" %><% end %>
+<%= link_to products_path, :class=> "btn btn-sm btn-primary" do %> <span class="glyphicon glyphicon-chevron-left"></span> <%= "Back" %><% end %>

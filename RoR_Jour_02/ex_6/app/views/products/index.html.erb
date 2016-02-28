@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Products</h1>
+
+<%= link_to new_product_path, :class=> "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-plus-sign"></span> <%= "New Product" %>
+<% end %>
+
+<div class="ui grid centered">
+<table class="ui collapsing blue celled padded table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.title %></td>
+        <td><%= product.description %></td>
+        <td><%= product.price %></td>
+        <td><%= link_to product, :class=> "btn btn-sm btn-primary" do %> <span class="glyphicon glyphicon-info-sign"></span> <%= "Show" %><% end %> |
+          <%= link_to edit_product_path(product), :class=> "btn btn-sm btn-primary" do %><span class="glyphicon glyphicon-edit"></span> <%= "Edit" %><% end %>
+          <%= button_to product, :method=>:delete, :class=>"btn btn-sm btn-danger" do %><i class="remove icon"></i> <%= "Delete" %><% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

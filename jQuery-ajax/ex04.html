@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>jQuery-ajax</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.0.js"></script>
+<script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.js"></script>
+</head>
+<body>
+<button id="butt">load noty</button>
+
+<script>
+  $("#butt").click(function (){
+    $.getScript( "js/noty-base.js" )
+    .success(function() {
+      generate("success", "Noty successfully loaded !");
+    });
+  });
+</script>
+</body>
+</html>
